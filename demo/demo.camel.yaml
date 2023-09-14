@@ -1,0 +1,12 @@
+- route:
+    id: route-cd05
+    from:
+      uri: kamelet:timer-source
+      id: from-e0e3
+      parameters:
+        period: 30000
+        message: time source
+      steps:
+        - log:
+            message: log:${body}
+            id: log-e285
