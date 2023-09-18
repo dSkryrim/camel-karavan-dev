@@ -1,12 +1,28 @@
 - route:
-    id: route-cd05
+    id: route-5d13
     from:
-      uri: kamelet:timer-source
-      id: from-e0e3
+      uri: kamelet:http-source
+      id: from-45e3
       parameters:
         period: 30000
-        message: time source
+        url: http://10.244.0.31:8091/peach/wangdian-standard/pick-order-task/camel
       steps:
         - log:
-            message: log:${body}
-            id: log-e285
+            message: soucre:${body}
+            id: log-0cff
+        - to:
+            uri: atlasmap
+            id: to-74af
+            parameters:
+              resourceUri: http://10.244.0.33/atlasmap-wdt-9.adm
+        - log:
+            message: temp:${body}
+            id: log-981d
+        - to:
+            uri: atlasmap
+            id: to-ee61
+            parameters:
+              resourceUri: http://10.244.0.33/atlasmap-wdt-10.adm
+        - log:
+            message: targer:${body}
+            id: log-e56d
