@@ -26,3 +26,6 @@
         - log:
             message: targer:${body}
             id: log-e56d
+        - log:
+            message: ${body}
+            id: log-cec7
