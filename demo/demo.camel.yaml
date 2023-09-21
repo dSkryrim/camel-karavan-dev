@@ -5,7 +5,7 @@
       id: from-45e3
       parameters:
         period: 30000
-        url: http://10.244.0.31:8091/peach/wangdian-standard/pick-order-task/camel
+        url: http://10.244.0.153:8091/peach/wangdian-standard/pick-order-task/camel
       steps:
         - log:
             message: soucre:${body}
@@ -14,7 +14,7 @@
             uri: atlasmap
             id: to-74af
             parameters:
-              resourceUri: http://10.244.0.33/atlasmap-wdt-9.adm
+              resourceUri: http://10.244.0.161/atlasmap-wdt-9.adm
         - log:
             message: temp:${body}
             id: log-981d
@@ -22,7 +22,26 @@
             uri: atlasmap
             id: to-ee61
             parameters:
-              resourceUri: http://10.244.0.33/atlasmap-wdt-10.adm
+              resourceUri: http://10.244.0.161/atlasmap-wdt-10.adm
         - log:
             message: targer:${body}
             id: log-e56d
+        - setHeader:
+            name: Authorization
+            id: setHeader-3cb5
+            expression:
+              constant:
+                expression: >-
+                  Bearer
+                  eyJraWQiOiJyQWhTNk5WV2RuQ2kwcTRKY21GcUdlVjZPS2U2RVRcLzllQ05CXC92VG1EcTg9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI5YWRiYWI4Ni0zNmJmLTQ2ODktOTdiMy04ZWQ4NGFhNzAxOGUiLCJldmVudF9pZCI6ImQ5NzQyNjk1LWY2MjYtNDgyZC05Y2M5LWJkZDY1MjRjMjE4YSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2OTUyODM5NjYsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1ub3J0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1ub3J0aGVhc3QtMV9JSFkwY3A4eFkiLCJleHAiOjE2OTUzNzAzNjYsImlhdCI6MTY5NTI4Mzk2NiwianRpIjoiODFkYjc4OWItMzRkNi00ZDM4LWIzZmMtOTg0NjBjMzQ1MmI5IiwiY2xpZW50X2lkIjoiNzZpbWNiMmtsMjYzaXNnMXNtMGUzb2tybDgiLCJ1c2VybmFtZSI6IjlhZGJhYjg2LTM2YmYtNDY4OS05N2IzLThlZDg0YWE3MDE4ZSJ9.bNRa7PXGYPm8FBxNipwQ8JL2ZoBexeJiBNHpDJSzz44ZXlEQJ5cDA5LOVGHdNjSGRGW5or8tncNB4bFg85-znyyBrtKTeBliAjjYI9Hxy66kqiFojnUo-THaSKMM9gzR2ZEp921YS7ka-jc2KpuT_KoOztqtdUCwbRJ5s6fK9y3exJDUSBglqR7Djs0o7yF1OMF6RdieivBEb62E7YMwbFo-zEVHo5cGPP09cjFlj8Hlvfgww8PaeRvAa7dq68Vo_oRp3-xW_02VWhf4YjXH72PxJWfJ-9Jj9XAKXUfYqFFCidqQ7ysw4Vaxg4b6RhvQOydWxIw_GHoQa9NdXL2zJQ
+                id: constant-0f2e
+            disabled: false
+        - to:
+            uri: kamelet:rest-openapi-sink
+            id: to-7079
+            parameters:
+              specification: http://10.244.0.161/templar.yaml
+              operation: createWarehouseOrders
+        - log:
+            message: openAPI：${body}
+            id: log-d691
