@@ -1,0 +1,16 @@
+- route:
+    id: route-ad87
+    from:
+      uri: knative
+      id: from-97a0
+      parameters:
+        environment: '#bean:knativeConfiguration'
+      steps:
+        - log:
+            message: ${body}
+            id: log-64de
+- beans:
+    - name: knativeConfiguration
+      properties:
+        environmentPath: classpath:knative.json
+      type: org.apache.camel.component.knative.KnativeConfiguration

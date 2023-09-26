@@ -1,0 +1,13 @@
+{
+    "services": [
+        {
+             "type": "channel|endpoint|event", 
+             "name": "", 
+             "metadata": {
+                 "service.url": "http://my-service.svc.cluster.local", 
+                 "knative.event.type": "", 
+                 "camel.endpoint.kind": "source|sink"
+             }
+        }
+    ]
+}
