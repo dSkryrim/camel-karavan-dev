@@ -9,8 +9,3 @@
         - log:
             message: ${body}
             id: log-64de
-- beans:
-    - name: knativeConfiguration
-      properties:
-        environmentPath: classpath:knative.json
-      type: org.apache.camel.component.knative.KnativeConfiguration
